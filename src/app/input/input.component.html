@@ -1,0 +1,27 @@
+<div class="field">
+    <label class="label">{{ label }}</label>
+    <div class="control">
+        <input [formControl]="control" class="input" [ngClass]="{ 'is-danger': showErrors() }" [mask]="mask" />
+    </div>
+    <ng-container *ngIf="showErrors()">
+        <div *ngIf="control.errors['required']" class="help is-danger">
+            Value is required.
+        </div>
+        <div *ngIf="control.errors['minlength']" class="help is-danger">
+            Value you entered is
+            {{ control.errors['minlength'].actualLength }}
+            characters long, but it must be at least
+            {{ control.errors['minlength'].requiredLength }}
+        </div>
+        <div *ngIf="control.errors['maxlength']" class="help is-danger">
+            Value you entered is
+            {{ control.errors['maxlength'].actualLength }}
+            characters long, but it cannot be longer than
+            {{ control.errors['maxlength'].requiredLength }}
+        </div>
+        <div *ngIf="control.errors['pattern']" class="help is-danger">
+            Invalid {{ label }} format.
+        </div>
+        <!-- input masking -->
+    </ng-container>
+</div>

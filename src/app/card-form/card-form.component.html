@@ -1,0 +1,29 @@
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <app-input label="Name" [control]="cardForm.controls.name"></app-input>
+    <!-- 卡號 用 ngx-mask 套件來做 input masking -->
+    <app-input label="Card Number" [control]="cardForm.controls.cardNumber" mask="0000-0000-0000-0000"></app-input>
+    <app-input label="Expiration (MM/YY)" [control]="cardForm.controls.expiration"></app-input>
+    <app-input label="Security Code" [control]="cardForm.controls.securityCode"></app-input>
+    <button type="submit" [disabled]="cardForm.invalid" class="button is-primary">Submit</button>
+    <button class="button is-warning" type="button" (click)="onResetClick()">Reset</button>
+</form>
+<hr>
+<!-- cardForm property 顯示出來統整 -->
+<div>Form Contents: {{ cardForm.value | json }}</div>
+<br>
+<h3 class="title">FormControl 可以操作的 Status </h3>
+<div class="content">
+    <ul class="list">
+        <li class="list-item">Form is Valid: {{ cardForm.valid }}</li>
+        <li class="list-item">Form is Invalid: {{ cardForm.invalid }}</li>
+        <li class="list-item">pending: Validation is currently running on this field --> {{ cardForm.pending }}</li>
+        <li class="list-item">touched: User clicked into then out of a field --> {{ cardForm.touched }}</li>
+        <li class="list-item">untouched: User hasn’t clicked into then out of this field --> {{ cardForm.untouched }}
+        </li>
+        <li class="list-item">pristine: User hasn’t clicked on this field at all --> {{ cardForm.pristine }}</li>
+        <li class="list-item">dirty: User has changed the value of this field --> {{ cardForm.dirty }}</li>
+    </ul>
+</div>
+
+<div>Errors around name: {{ cardForm.get('name').errors | json }}</div>
+<!-- <div>Errors around name: {{ cardForm.controls.name.errors | json }}</div> -->
