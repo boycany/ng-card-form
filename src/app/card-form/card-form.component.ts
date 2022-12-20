@@ -12,7 +12,7 @@ export class CardFormComponent {
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(8),
+      Validators.maxLength(16),
       Validators.pattern(/^[\u4e00-\u9fa5]+$|^[a-zA-Z\s,'-]+$/), //中文、英文、space、特殊符號,'-
     ]),
     cardNumber: new FormControl('', [
@@ -40,5 +40,10 @@ export class CardFormComponent {
   }
   onResetClick() {
     this.cardForm.reset(); //是將每個 FormControl 的實體都設定成 null，而不是初始值
+
+    const { name, cardNumber, securityCode } = this.cardForm.controls;
+    name.setValue('');
+    cardNumber.setValue('');
+    securityCode.setValue(''); //用 setValue() 將 value 設置為 ''
   }
 }
